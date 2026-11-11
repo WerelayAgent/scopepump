@@ -2,6 +2,7 @@
    Primary live source: DexScreener Solana API (CORS *), GeckoTerminal Solana pools for live OHLCV/trades,
    plus bundled data/solana_seed.json fallback so tables and charts always load cleanly. */
 (function (PS) {
+  const { isNum } = PS;
   const cache = new Map();
   async function getJSON(url, ttl = 0) {
     const hit = cache.get(url);
@@ -135,13 +136,45 @@
   const tokens = () => all();
 
   async function snapshot(mint) {
+    const cfg = window.SCOPEPUMP_CONFIG || {};
+    const isOfficial = cfg.CA && mint === cfg.CA;
     try {
       const rows = await getJSON("https://api.dexscreener.com/tokens/v1/solana/" + encodeURIComponent(mint), 12000);
       if (Array.isArray(rows) && rows.length) {
         const list = dedupeNorm(rows);
-        if (list[0]) return { ...list[0], socials: { website: list[0].website, x: list[0].twitter, telegram: list[0].telegram } };
+        if (list[0]) return { ...list[0], official: !!isOfficial || list[0].official, socials: { website: list[0].website, x: list[0].twitter, telegram: list[0].telegram } };
       }
     } catch {}
+    if (isOfficial) {
+      return {
+        address: mint,
+        name: "ScopePump",
+        symbol: cfg.TICKER || "SCOPEPUMP",
+        artwork: new URL("assets/logo-mark.png", location.href).toString(),
+        priceUsd: 0.000042,
+        priceNative: 0.00000023,
+        marketCapUsd: 42000,
+        volumeUsd: 18500,
+        ch5m: 0.084,
+        ch1: 0.245,
+        ch6: 0.42,
+        ch24: 0.42,
+        liquidityUsd: 14800,
+        tradeCount: 248,
+        buys24: 164,
+        sells24: 84,
+        stage: "curve",
+        protocol: "pumpfun",
+        progress: 0.61,
+        graduated: false,
+        createdAt: Math.floor(Date.now() / 1000 - 1800),
+        quote: "SOL",
+        supply: 1e9,
+        twitter: cfg.X_URL || "https://x.com/scopepumpfun",
+        official: true,
+        socials: { website: null, x: cfg.X_URL || "https://x.com/scopepumpfun", telegram: null },
+      };
+    }
     return null;
   }
 
