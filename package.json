@@ -1,0 +1,6 @@
+{
+  "name": "scopepump",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ScopePump — Live screener and bonding-curve terminal for pump.fun tokens on Solana."
+}
