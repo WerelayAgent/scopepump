@@ -2,6 +2,29 @@
   "version": 2,
   "outputDirectory": ".",
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/api/pons",
+      "destination": "https://ponscope.fun/api/pons"
+    },
+    {
+      "source": "/api/relay",
+      "destination": "https://ponscope.fun/api/relay"
+    },
+    {
+      "source": "/api/img",
+      "destination": "https://ponscope.fun/api/img"
+    },
+    {
+      "source": "/papi/(.*)",
+      "destination": "https://ponsfamily.com/api/launches/$1"
+    },
+    {
+      "source": "/psearch",
+      "destination": "https://ponscope.fun/psearch"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/$1"
+    }
   ]
 }

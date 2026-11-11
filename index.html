@@ -3,33 +3,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ScopePump — pump.fun tokens on Solana</title>
-<meta name="description" content="Live screener for tokens launched on pump.fun on Solana: prices, market cap, bonding curve progress, volume, trades and charts.">
-<meta name="theme-color" content="#07080f">
+<title>ScopePump — Pons tokens on Robinhood Chain</title>
+<meta name="description" content="Live screener for tokens launched on Pons on Robinhood Chain: prices, market cap, bonding curve progress, volume, trades and charts.">
+<meta name="theme-color" content="#f5f5f7">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ScopePump">
-<meta property="og:description" content="Every pump.fun launch on Solana, live.">
+<meta property="og:description" content="Every Pons launch on Robinhood Chain, live.">
 <meta property="og:site_name" content="ScopePump">
 <meta property="og:image" content="/og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="ScopePump">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ScopePump">
-<meta name="twitter:description" content="Every pump.fun launch on Solana, live.">
+<meta name="twitter:description" content="Every Pons launch on Robinhood Chain, live.">
 <meta name="twitter:image" content="/og-image.png">
-<link rel="icon" href="/favicon.ico?v=20261111" sizes="any">
-<link rel="icon" type="image/png" href="/favicon.png?v=20261111">
-<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=20261111">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20261111">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="/favicon.ico?v=20261110s" sizes="any">
+<link rel="icon" type="image/png" href="/favicon.png?v=20261110s">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=20261110s">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20261110s">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/app.css?v=20261111">
+<link rel="stylesheet" href="css/app.css?v=20261110s">
 </head>
 <body>
 <header class="top">
-  <a class="brand" href="#/" aria-label="ScopePump home"><img src="assets/logo-mark.png?v=20261111" alt="" width="34" height="34"><span><b>Scope</b><i>pump</i></span></a>
+  <a class="brand" href="#/" aria-label="ScopePump home"><img src="assets/logo-mark.png?v=20261110s" alt="" width="34" height="34"><span><b>Scope</b><i>pump</i></span></a>
   <nav class="mainnav" id="mainnav" aria-label="Main">
     <a href="#/" data-nav="screener" class="on"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 19h16M7 15l4-5 3 3 5-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Screener</span></a>
     <a href="#/bridge" data-nav="bridge"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M3 17h18M5 17v-4a7 7 0 0 1 14 0v4M9 17v-3M15 17v-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Bridge</span></a>
@@ -38,11 +36,11 @@
   </nav>
   <div class="search">
     <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-    <input id="q" type="search" placeholder="Search name, symbol or Solana mint" autocomplete="off" spellcheck="false" aria-label="Search tokens">
+    <input id="q" type="search" placeholder="Search name, symbol or 0x address" autocomplete="off" spellcheck="false" aria-label="Search tokens">
     <div id="suggest" class="suggest" hidden></div>
   </div>
   <div class="top-right">
-    <span class="chain-pill" title="Solana Mainnet"><i class="dot"></i>Solana</span>
+    <span class="chain-pill" title="Robinhood Chain (chain ID 4663)"><i class="dot"></i>Robinhood Chain</span>
     <a class="x-link" href="https://x.com/scopepumpfun" target="_blank" rel="noopener noreferrer" aria-label="ScopePump on X (@scopepumpfun)" title="@scopepumpfun on X"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
   </div>
 </header>
@@ -50,19 +48,23 @@
 <main id="app" class="app"><div class="loading">Loading…</div></main>
 <footer class="foot pfoot">
   <div class="pf-in">
-    <span class="pf-brand"><img src="assets/logo-mark.png?v=20261111" alt="" width="22" height="22"><b>Scope</b><i>pump</i></span>
+    <span class="pf-brand"><img src="assets/logo-mark.png?v=20261110s" alt="" width="22" height="22"><b>Scope</b><i>pump</i></span>
     <div class="pf-ca" id="footca" hidden></div>
     <a class="x-foot" href="https://x.com/scopepumpfun" target="_blank" rel="noopener noreferrer" aria-label="ScopePump on X (@scopepumpfun)"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><span>@scopepumpfun</span></a>
   </div>
 </footer>
 <div id="toast" class="toast" hidden></div>
 <script src="vendor/lightweight-charts.standalone.production.js"></script>
-<script src="js/config.js?v=20261111"></script>
-<script src="js/util.js?v=20261111"></script>
-<script src="js/api.js?v=20261111"></script>
-<script src="js/list.js?v=20261111"></script>
-<script src="js/detail.js?v=20261111"></script>
-<script src="js/bridge.js?v=20261111"></script>
-<script src="js/app.js?v=20261111"></script>
+<script src="js/config.js?v=20261110s"></script>
+<script src="js/util.js?v=20261110s"></script>
+<script src="js/api.js?v=20261110s"></script>
+<script src="js/list.js?v=20261110s"></script>
+<script src="js/detail.js?v=20261110s"></script>
+<script src="js/bridge.js?v=20261110s"></script>
+<script src="js/staking.js?v=20261110s"></script>
+<script src="js/sniper-core.js?v=20261110s"></script>
+<script src="js/tradewallet.js?v=20261110s"></script>
+<script src="js/sniper.js?v=20261110s"></script>
+<script src="js/app.js?v=20261110s"></script>
 </body>
 </html>
