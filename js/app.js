@@ -96,21 +96,30 @@
   route();
 })(window.PS);
 
-/* Token CA pill (header) + footer CA row, driven by js/config.js. Hidden while CA is empty. */
+/* Token CA pill (header) + footer CA row, driven by js/config.js. */
 (function () {
   const C = window.PONSCOPE_CONFIG || {}, ca = String(C.CA || "").trim();
   if (C.X_URL) document.querySelectorAll("a.x-link,a.x-foot").forEach((a) => { a.href = C.X_URL; });
-  const isEvm = /^0x[0-9a-fA-F]{40}$/.test(ca), isSol = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(ca);
-  if (!isEvm && !isSol) return;
+  if (!ca) return;
+  const isEvm = /^0x[0-9a-fA-F]{40}$/.test(ca);
   const esc = window.PS.esc, sym = String(C.TICKER || "").replace(/[^A-Za-z0-9]/g, "").slice(0, 12), lab = sym ? "$" + sym : "CA";
-  const buy = (C.BUY_URL || (isSol ? "https://pump.fun/coin/" : "https://ponsfamily.com/launchpad/")) + ca, sh = ca.slice(0, 6) + "…" + ca.slice(-4);
-  const caHref = isEvm ? `#/token/${esc(ca)}` : buy, caAttrs = isEvm ? "" : ' target="_blank" rel="noopener noreferrer"';
+  const buy = isEvm ? (C.BUY_URL || "https://ponsfamily.com/launchpad/") + ca : "https://ponsfamily.com";
   const cpSvg = '<svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>';
   const d = document.createElement("div"); d.className = "tokcta";
-  d.innerHTML = `<span class="ca-pill" title="${esc(lab)} contract address: ${esc(ca)}"><a href="${esc(caHref)}"${caAttrs}><span class="ca-l">${esc(lab)}</span><span class="mono">${esc(sh)}</span></a><button type="button" class="ca-cp" data-cp="${esc(ca)}" data-cp-btn aria-label="Copy contract address">${cpSvg}<span class="cp-t">Copy CA</span></button></span><a class="buy-btn" href="${esc(buy)}" target="_blank" rel="noopener noreferrer">Buy${sym ? " " + esc(lab) : ""}</a>`;
+  if (isEvm) {
+    const sh = ca.slice(0, 6) + "…" + ca.slice(-4);
+    d.innerHTML = `<span class="ca-pill" title="${esc(lab)} contract address: ${esc(ca)}"><a href="#/token/${esc(ca)}"><span class="ca-l">${esc(lab)}</span><span class="mono">${esc(sh)}</span></a><button type="button" class="ca-cp" data-cp="${esc(ca)}" data-cp-btn aria-label="Copy contract address">${cpSvg}<span class="cp-t">Copy CA</span></button></span><a class="buy-btn" href="${esc(buy)}" target="_blank" rel="noopener noreferrer">Buy${sym ? " " + esc(lab) : ""}</a>`;
+  } else {
+    d.innerHTML = `<span class="ca-pill" title="${esc(ca)}"><span style="display:inline-flex;align-items:center;gap:6px;padding:0 11px;height:100%;font-size:12px;color:var(--text)"><span class="ca-l">${esc(lab)}</span><span class="mono">${esc(ca)}</span></span></span><a class="buy-btn" href="${esc(buy)}" target="_blank" rel="noopener noreferrer">Pons ↗</a>`;
+  }
   const tr = document.querySelector(".top .top-right"); tr && tr.parentNode.insertBefore(d, tr);
   const f = document.getElementById("footca");
-  if (f) { f.innerHTML = `<span class="muted">${esc(lab)}</span><a class="ca-full" href="${esc(caHref)}"${caAttrs}>${esc(ca)}</a><button type="button" class="ca-cp" data-cp="${esc(ca)}" data-cp-btn aria-label="Copy contract address"><span class="cp-t">Copy CA</span></button><a class="buy-btn sm" href="${esc(buy)}" target="_blank" rel="noopener noreferrer">Buy</a>`; f.hidden = false; }
+  if (f) {
+    f.innerHTML = isEvm
+      ? `<span class="muted">${esc(lab)}</span><a class="ca-full" href="#/token/${esc(ca)}">${esc(ca)}</a><button type="button" class="ca-cp" data-cp="${esc(ca)}" data-cp-btn aria-label="Copy contract address"><span class="cp-t">Copy CA</span></button><a class="buy-btn sm" href="${esc(buy)}" target="_blank" rel="noopener noreferrer">Buy</a>`
+      : `<span class="muted">${esc(lab)}</span><span class="ca-full">${esc(ca)}</span><a class="buy-btn sm" href="${esc(buy)}" target="_blank" rel="noopener noreferrer">Pons ↗</a>`;
+    f.hidden = false;
+  }
 })();
 /* Staking nav: drop the Soon badge once a staking contract is configured. */
 (function () { if (!window.PS.STAKING_LIVE) return; const b = document.querySelector('#mainnav a[data-nav="staking"] .soon'); b && b.remove(); })();
